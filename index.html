@@ -1,21 +1,209 @@
----
-layout: default
----
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Joshua Arnold – AI engineer</title>
+  <meta name="description" content="Joshua Arnold: AI engineer with a PhD in AI, based in Brisbane. Voice agents, LLM pipelines, and the evaluation and monitoring that keep them honest.">
+  <link rel="canonical" href="https://josharnold.com.au/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Joshua Arnold – AI engineer">
+  <meta property="og:description" content="I build AI systems that end up in front of real people, from voice agents to LLM pipelines.">
+  <meta property="og:url" content="https://josharnold.com.au/">
+  <meta property="og:image" content="https://josharnold.com.au/images/josh-and-myco.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23EF5B0C'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --charcoal: #333745;   /* same palette as the CV */
+      --navy: #003865;
+      --accent: #EF5B0C;
+      --muted: #5F6470;
+      --hairline: #C5CAD3;
+      --band-muted: #C9CDD6;
+      --text: #262a33;
+      --soft: #F4F5F7;
+    }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: #fff;
+      color: var(--text);
+      font: 400 17px/1.65 "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    img, video { display: block; max-width: 100%; height: auto; }
+    a { color: var(--navy); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+    a:hover { color: var(--accent); }
+    a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
 
-Welcome to my website where I document the various projects I am pursing. 
-Looking for code? Checkout <a href="https://github.com/jotia1">my github profile</a> for my most recent activity or browse below.
+    /* Header band */
+    .band { background: var(--charcoal); color: #fff; }
+    .band .wrap { display: flex; align-items: center; gap: 34px; padding-top: 60px; padding-bottom: 60px; }
+    .avatar { width: 128px; height: 128px; border-radius: 50%; flex: none; object-fit: cover;
+              box-shadow: 0 0 0 4px var(--charcoal), 0 0 0 6px var(--accent); }
+    h1 { margin: 0; font-size: 2.6rem; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; }
+    .tagline { margin: 6px 0 14px; color: var(--band-muted); font-size: 1.05rem; }
+    .lede { margin: 0 0 18px; max-width: 640px; font-size: 1.25rem; line-height: 1.5; color: #fff; }
+    .links { display: flex; flex-wrap: wrap; gap: 10px 22px; margin: 0; padding: 0; list-style: none; }
+    .links a { color: #fff; text-decoration: none; border-bottom: 2px solid var(--accent); padding-bottom: 1px; }
+    .links a:hover { color: var(--band-muted); }
 
-<div class="posts">
-  {% for post in site.posts %}
-    <article class="post">
+    /* Projects */
+    main.wrap { padding-top: 56px; padding-bottom: 24px; }
+    h2 { margin: 0 0 34px; color: var(--navy); font-size: 1.7rem; line-height: 1.2; font-weight: 700; }
+    .feature { display: grid; grid-template-columns: 1fr 1fr; gap: 52px; align-items: center; margin: 0 0 72px; }
+    .feature.flip .media { order: 2; }
+    .media { display: block; border-radius: 16px; overflow: hidden; aspect-ratio: 1 / 1;
+             box-shadow: 0 1px 2px rgba(20, 24, 33, 0.06), 0 10px 30px rgba(20, 24, 33, 0.10); }
+    .media img, .media video { width: 100%; height: 100%; object-fit: cover; }
+    .media.seal { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 26px; background: #F5F0E3; }
+    .media.seal img { height: auto; object-fit: contain; }
+    .media.seal .mark { width: 40%; }
+    .media.seal .wordmark { width: 64%; }
+    .media .still { display: none; }
+    h3 { margin: 0 0 10px; font-size: 1.55rem; line-height: 1.2; font-weight: 700; }
+    h3 a { color: var(--accent); text-decoration: none; }
+    h3 a:hover { text-decoration: underline; }
+    .feature p, .card p { margin: 0; }
+    .actions { margin-top: 16px !important; display: flex; flex-wrap: wrap; gap: 10px; }
+    .actions a { display: inline-block; padding: 7px 14px; border: 1px solid var(--hairline); border-radius: 999px;
+                 color: var(--navy); text-decoration: none; font-size: 0.92rem; font-weight: 500; }
+    .actions a:hover { border-color: var(--accent); color: var(--accent); }
 
-      <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
+    .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 0 0 72px; }
+    .card { background: var(--soft); border-radius: 16px; padding: 26px 28px; }
+    .card h3 { font-size: 1.2rem; }
 
-      <div class="entry">
-        {{ post.excerpt }}
+    /* About */
+    .about { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 52px; align-items: start; }
+    .about img { border-radius: 16px; box-shadow: 0 10px 30px rgba(20, 24, 33, 0.10); }
+    .about p { margin: 0 0 14px; }
+
+    footer { margin-top: 56px; border-top: 1px solid var(--hairline); }
+    footer .wrap { padding-top: 20px; padding-bottom: 40px; font-size: 0.9rem; color: var(--muted); }
+    footer a { color: var(--muted); }
+    .sep { padding: 0 6px; color: var(--hairline); }
+
+    @media (max-width: 760px) {
+      body { font-size: 16px; }
+      .band .wrap { flex-direction: column; align-items: flex-start; gap: 20px; padding-top: 36px; padding-bottom: 36px; }
+      .avatar { width: 96px; height: 96px; }
+      h1 { font-size: 2.1rem; }
+      .lede { font-size: 1.12rem; }
+      main.wrap { padding-top: 40px; }
+      .feature, .about, .cards { grid-template-columns: 1fr; gap: 22px; margin-bottom: 52px; }
+      .feature.flip .media { order: 0; }
+      .media { max-width: 520px; }
+    }
+    @media (prefers-reduced-motion: reduce) { .media video { display: none; } .media .still { display: block; } }
+  </style>
+</head>
+<body>
+  <header class="band">
+    <div class="wrap">
+      <img class="avatar" src="images/josh_headshot.jpg" alt="Photo of Joshua Arnold" width="128" height="128">
+      <div>
+        <h1>Joshua Arnold</h1>
+        <p class="tagline">AI engineer · PhD in AI · Brisbane</p>
+        <p class="lede">I build AI systems that end up in front of real people, from voice agents to LLM pipelines, along
+          with the evaluation and monitoring that keep them honest.</p>
+        <ul class="links">
+          <li><a href="https://github.com/jotia1">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/joshua-arnold-bb917886">LinkedIn</a></li>
+        </ul>
       </div>
+    </div>
+  </header>
 
-      <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a>
+  <main class="wrap">
+    <h2>Projects</h2>
+
+    <article class="feature">
+      <a class="media" href="https://stonescorner.ai" aria-label="Stones Corner AI website">
+        <img src="images/myco-robot.jpg" alt="MyCo, the Stones Corner AI social robot, with a wooden body and a screen face" width="900" height="900" loading="lazy">
+      </a>
+      <div>
+        <h3><a href="https://stonescorner.ai">Stones Corner AI</a></h3>
+        <p>Social robots for aged care, which I co-founded. I built the software side: a real-time voice agent, the
+          robot's on-device services, safety monitoring for every conversation, and the cloud and apps around it.</p>
+        <p class="actions"><a href="https://stonescorner.ai">stonescorner.ai</a></p>
+      </div>
     </article>
-  {% endfor %}
-</div>
+
+    <article class="feature flip">
+      <a class="media" href="https://foraging-lab.josharnold.com.au" aria-label="Open the live Foraging Lab tank">
+        <video autoplay muted loop playsinline width="400" height="400" poster="images/foraging-lab-tank.jpg">
+          <source src="images/foraging-lab-tank.webm" type="video/webm">
+          <source src="images/foraging-lab-tank.mp4" type="video/mp4">
+        </video>
+        <img class="still" src="images/foraging-lab-tank.jpg" alt="Spiking-neural-network creatures foraging for food in the Foraging Lab tank" width="400" height="400">
+      </a>
+      <div>
+        <h3><a href="https://foraging-lab.josharnold.com.au">Foraging Lab</a></h3>
+        <p>A live tank of evolving spiking-neural-network creatures you can poke at, with an inference API and a model
+          registry behind it. Organisms that eat survive and breed, and the best brains are benchmarked and promoted
+          automatically.</p>
+        <p class="actions"><a href="https://foraging-lab.josharnold.com.au">Watch it live</a><a href="https://gitlab.com/jotia1/foraging-lab">Code on GitLab</a></p>
+      </div>
+    </article>
+
+    <article class="feature">
+      <a class="media seal" href="https://compcase.com.au" aria-label="CompCase AI website">
+        <img class="mark" src="images/compcase-seal.png" alt="" width="420" height="420" loading="lazy">
+        <img class="wordmark" src="images/compcase-wordmark.png" alt="CompCase" width="600" height="146" loading="lazy">
+      </a>
+      <div>
+        <h3><a href="https://compcase.com.au">CompCase AI</a></h3>
+        <p>Sentencing research for Queensland criminal lawyers, which I co-founded. An LLM pipeline turns court judgments
+          into cited, structured data, and a practising lawyer's golden set checks every prompt change.</p>
+        <p class="actions"><a href="https://compcase.com.au">compcase.com.au</a></p>
+      </div>
+    </article>
+
+    <div class="cards">
+      <article class="card">
+        <h3><a href="https://gitlab.com/jotia1/spike-forest">spike-forest</a></h3>
+        <p>A small, modular spiking-neural-network simulator built around one question: what happens when several
+          plasticity rules run at the same time in the same network? It's the engine behind Foraging Lab's brains.</p>
+        <p class="actions"><a href="https://gitlab.com/jotia1/spike-forest">Code on GitLab</a></p>
+      </article>
+      <article class="card">
+        <h3><a href="https://github.com/jotia1/spiking-net-tensorflow">Spiking neural networks in TensorFlow</a></h3>
+        <p>An early side project: a spiking network simulator with plastic synaptic delays and weights.</p>
+        <p class="actions"><a href="https://github.com/jotia1/spiking-net-tensorflow">Code on GitHub</a></p>
+      </article>
+    </div>
+
+    <h2>About</h2>
+    <div class="about">
+      <img src="images/josh-and-myco.jpg" alt="Joshua Arnold presenting the MyCo robot" width="1200" height="649" loading="lazy">
+      <div>
+        <p>In my PhD at the University of Queensland I worked on unsupervised learning in spiking neural networks with
+          varying types and intensities of noise. Specifically, I studied how the plasticity of action potential
+          conduction delays can be used as a functional computational mechanism, similar to weight learning in
+          networks of spiking neurons.</p>
+        <p>I've also been principal data scientist at Vincents, a national professional services firm, where I led the
+          team that built LLM tools for forensic accountants and lawyers. Before that I was a postdoc at the Queensland
+          Brain Institute, where I built a pipeline that processed hundreds of terabytes of brain imaging.</p>
+        <p>I've taught at the University of Queensland for over a decade, from tutoring to running 500-student courses,
+          and I supervise student projects there. In my spare time I like to try out new hobbies like watchmaking and
+          3D printing, or take my dogs out adventuring.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      © <span id="year">2026</span> Joshua Arnold<span class="sep">·</span><a href="https://github.com/jotia1">GitHub</a><span class="sep">·</span><a href="https://www.linkedin.com/in/joshua-arnold-bb917886">LinkedIn</a>
+    </div>
+  </footer>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
